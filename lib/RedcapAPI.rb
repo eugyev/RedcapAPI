@@ -1,6 +1,5 @@
 require "RedcapAPI/version"
-
- class RedcapAPI
+class RedcapAPI
   def initialize(token, url)
     @url = url
     @token = token
@@ -57,8 +56,4 @@ require "RedcapAPI/version"
       (max_entry.to_i + 1).to_s
     end
   end
-  
-  
-end  
-
 

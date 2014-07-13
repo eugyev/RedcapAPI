@@ -23,6 +23,15 @@ Gem::Specification.new do |spec|
   r.get_fields # returns all fields for that instrument
   
   r.post(data) # this will either update an old record or create a new one. the data should be in form of array of hashes or as a hash (for one item).  dates are accepted in Date class or in strftime('%F') format. 
+  for example
+    data = {name: 'this is a test', field_2: Date.today}
+    r.post(data) # creates a new object using the fields above. field names must match those in the existing project
+    "{\"count\": 1}" --> indicates the object posted. 
+  
+  to update an existing record:
+  data = {record_id: 3, name: 'this is a test to update', field_2: Date.today}
+  r.post(data) # this will update the record with record_id 3. if record_id 3 does not exist it will create an entry with that record id
+  
   }
   spec.homepage      = ""
   spec.license       = "MIT"

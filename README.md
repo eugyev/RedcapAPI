@@ -1,24 +1,13 @@
-# RedcapAPI
+# Usage
 
-TODO: Write a gem description
+This is an api to utilize REDCAP api with ruby. This Gem requires mechanize as a dependency.
+it is based on instructions here http://sburns.org/2013/07/22/intro-to-redcap-api.html
 
-## Installation
+To start:
 
-Add this line to your application's Gemfile:
+r = RedcapAPI.new(token, url) # your institution has it's own url, and each project has it's own token
 
-    gem 'RedcapAPI'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install RedcapAPI
-
-## Usage
-
-TODO: Write usage instructions here
+r.get(optional record_id) # returns all records in JSON format or a specific record if specified
 
 ## Contributing
 

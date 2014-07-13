@@ -11,11 +11,18 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{This is an api to utilize REDCAP api with ruby. This Gem requires mechanize as a dependency.
   it is based on instructions here http://sburns.org/2013/07/22/intro-to-redcap-api.html
   }
-  spec.description   = %q{To start:
+  spec.description   = %q{
+    This gem is still under active development. Please contact me directly with any  questions or suggestions. 
+    
+  To start:
 
   r = RedcapAPI.new(token, url) # your institution has it's own url, and each project has it's own token
 
   r.get(optional record_id) # returns all records in JSON format or a specific record if specified
+  
+  r.get_fields # returns all fields for that instrument
+  
+  r.post(data) # this will either update an old record or create a new one. the data should be in form of array of hashes or as a hash (for one item).  dates are accepted in Date class or in strftime('%F') format. 
   }
   spec.homepage      = ""
   spec.license       = "MIT"

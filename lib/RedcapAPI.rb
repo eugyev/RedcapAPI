@@ -1,13 +1,19 @@
 require "RedcapAPI/version"
   class RedcapAPI
+    DEFAULT_PARAMS = {
+      :content => 'record',
+      :format  => 'json',
+      :type    => 'flat'
+    }
+
     def initialize(token, url)
-      @url = url
-      @token = token
+      @url     = url
+      @payload = DEFAULT_PARAMS
+      @payload[:token] = token
     end
 
     def get(record_id = nil)
-      payload = {:token=>@token, :format=>"json", :content=>"record", :type => 'flat'}
-      data = JSON.parse Mechanize.new.post(@url, payload).body
+      data = JSON.parse Mechanize.new.post(@url, @payload).body
       if record_id
         data = data.select{|x| x['record_id'] == record_id.to_s}
       end
@@ -15,8 +21,7 @@ require "RedcapAPI/version"
     end
   
     def get_fields
-      payload = {:token=>@token, :format=>"json", :content=>"metadata"}
-      response = JSON.parse Mechanize.new.post(@url, payload).body
+      response = export_metadata()
       if response
         response.collect {|r| r['field_name'] if r }
       end
@@ -25,8 +30,7 @@ require "RedcapAPI/version"
     def post(data)
       data = filter_data(data)
       data_string = data.to_json
-      payload = {:token => @token, :format=> 'json', :content=>'record', :type => 'flat', :data => data_string}
-      Mechanize.new.post(@url, payload).body      
+      return self.import({:data => data_string})
     end
   
     def filter_data(data)
@@ -55,5 +59,23 @@ require "RedcapAPI/version"
         max_entry = old_entries.max_by{|e| e['record_id'].to_i}['record_id']
         (max_entry.to_i + 1).to_s
       end
+    end
+
+    def export(params = {})
+      return JSON.parse(api(params))
+    end
+
+    def export_metadata(params = {})
+      payload = {:content => 'metadata'}.merge(params)
+      return self.export(payload)
+    end
+
+    def import(params = {})
+      return api(params)
+    end
+
+    def api(params = {})
+      payload = @payload.merge(params)
+      return Mechanize.new.post(@url, payload).body
     end
   end

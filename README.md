@@ -9,6 +9,14 @@ To start:
 
 r = RedcapAPI.new(token, url) # your institution has it's own url, and each project has it's own token
 
+r.export(optional params) # returns all records in JSON format, provide additional hash of parameters in you want to override or add any additional RedcapAPI options.
+
+r.export_metadata(optional params) # returns all metadata records in JSON format, provide additional hash of parameters in you want to override or add any additional RedcapAPI options.
+
+r.import(optional params) # imports new records, the 'post' method is likely more helpful as it puts the 'data' in the correct format.
+
+r.api(optional params) # returns the raw data, this allows you to return 'xml' or 'csv' instead of forcing 'json'. Simply override the params. Example r.api({:format => 'xml'}).
+
 r.get(optional record_id) # returns all records in JSON format or a specific record if specified
 
 r.get_fields # returns all fields for that instrument

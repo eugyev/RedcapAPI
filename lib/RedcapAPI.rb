@@ -26,11 +26,11 @@ require "mechanize"
       :type    => 'flat'
     }
 
-    def initialize(token, url, format = JSON)
+    def initialize(token, url, parser = JSON)
       @url     = url
       @payload = DEFAULT_PARAMS
       @payload[:token] = token
-      @format  = format
+      @parser  = parser
     end
 
     def get(record_id = nil)
@@ -83,7 +83,7 @@ require "mechanize"
     end
 
     def export(params = {})
-      return @format.parse(api(params))
+      return @parser.parse(api(params))
     end
 
     def export_metadata(params = {})

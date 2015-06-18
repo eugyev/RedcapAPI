@@ -31,6 +31,11 @@ to update an existing record:
 data = {record_id: 3, name: 'this is a test to update', field_2: Date.today}
 r.post(data) # this will update the record with record_id 3. if record_id 3 does not exist it will create an entry with that record id
 
+There is also a helper class added to ruby Hash allowing you to convert a ruby array to a http-post style array. I created this after having some issues filtering on 'forms' and 'fields'
+Example:
+params = {:fields => ['record_id', 'lab_id'], :forms => ['slide_tracking', 'id_shipping']} # This is the data I want to send to RedcapAPI, limiting the fields and forms
+r.export_metadata(params.to_http_post_array()) # This gets the metadata for only those fields/forms by using the newly added method on Hash 'to_http_post_array'.
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/RedcapAPI/fork )

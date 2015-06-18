@@ -1,4 +1,6 @@
 require "RedcapAPI/version"
+require "json"
+require "mechanize"
   class RedcapAPI
     def initialize(token, url)
       @url = url

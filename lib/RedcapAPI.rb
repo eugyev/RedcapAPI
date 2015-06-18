@@ -26,14 +26,15 @@ require "mechanize"
       :type    => 'flat'
     }
 
-    def initialize(token, url)
+    def initialize(token, url, parser = JSON)
       @url     = url
       @payload = DEFAULT_PARAMS
       @payload[:token] = token
+      @parser  = parser
     end
 
     def get(record_id = nil)
-      data = JSON.parse Mechanize.new.post(@url, @payload).body
+      data = self.export()
       if record_id
         data = data.select{|x| x['record_id'] == record_id.to_s}
       end
@@ -82,7 +83,7 @@ require "mechanize"
     end
 
     def export(params = {})
-      return JSON.parse(api(params))
+      return @parser.parse(api(params))
     end
 
     def export_metadata(params = {})

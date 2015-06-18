@@ -7,7 +7,7 @@ This gem is still under active development. Please contact me directly with any 
   
 To start:
 
-r = RedcapAPI.new(token, url) # your institution has it's own url, and each project has it's own token
+r = RedcapAPI.new(token, url, parser) # your institution has it's own url, and each project has it's own token, an optional 'parser' that defaults to JSON. See the test cases for how to use other parsers like Nokogiri::XML and CSV.
 
 r.export(optional params) # returns all records in JSON format, provide additional hash of parameters in you want to override or add any additional RedcapAPI options.
 

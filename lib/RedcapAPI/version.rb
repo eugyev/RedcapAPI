@@ -1,3 +1,3 @@
 class RedcapAPI
-  VERSION = "0.0.5b"
+  VERSION = "0.0.6"
 end

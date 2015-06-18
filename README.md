@@ -3,7 +3,9 @@
 This is an api to utilize REDCAP api with ruby. This Gem requires mechanize as a dependency.
 it is based on instructions here http://sburns.org/2013/07/22/intro-to-redcap-api.html
 
-This gem is still under active development. Please contact me directly with any  questions or suggestions. 
+This gem is under development and testing.  If you would like to make changes or have comments, reach me at eugene@tranquiltech.io
+
+Special thanks to mmcrockett for making great additions. 
   
 To start:
 ```ruby
